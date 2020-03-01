@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.study.dao.PlanDao">
+ 
+ 	<insert id="insert" parameterType="planVO">
+ 	INSERT INTO tbl_study_plan(
+ 	p_seq,
+ 	p_plan
+ 	) VALUES (
+ 			SEQ_PLAN.NEXTVAL,
+ 			#{p_plan,jdbcType=VARCHAR}
+)
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="planVO">
+ 	
+ 	UPDATE tbl_study_plan SET
+ 	
+			p_plan = #{p_plan,jdbcType=VARCHAR}
+	
+			WHERE s_seq = #{s_seq}
+ 	
+ 	</update>
+ 
+ </mapper> 

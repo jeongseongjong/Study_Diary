@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.study.dao.StudyDao">
+ 
+ 	<insert id="insert" parameterType="studyVO">
+ 	INSERT INTO tbl_study(
+		 	S_SEQ,
+			S_ID,
+			S_SUBJECT,
+			S_CONTENT,
+			S_CATE,
+			S_S_TIME,
+			S_F_TIME,
+			S_TIME
+ 	
+ 	) VALUES (
+ 			SEQ_STUDY.NEXTVAL,
+
+			#{s_id,jdbcType=VARCHAR},
+			#{s_subject,jdbcType=VARCHAR},
+			#{s_content,jdbcType=VARCHAR},
+			#{s_cate,jdbcType=VARCHAR},
+			#{s_s_time,jdbcType=VARCHAR},
+			#{s_f_time,jdbcType=VARCHAR},
+			#{s_time,jdbcType=VARCHAR}
+)
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="studyVO">
+ 	
+ 	UPDATE tbl_study SET
+ 	
+			s_id = #{s_id,jdbcType=VARCHAR},
+			s_subject = #{s_subject,jdbcType=VARCHAR},
+			s_content = #{s_content,jdbcType=VARCHAR},
+			s_cate= #{s_cate,jdbcType=VARCHAR},
+			s_s_time = #{s_s_time,jdbcType=VARCHAR},
+			s_f_time = #{s_f_time,jdbcType=VARCHAR},
+			s_time = #{s_time,jdbcType=VARCHAR}
+	
+			WHERE s_seq = #{s_seq}
+ 	
+ 	</update>
+ 
+ </mapper> 
