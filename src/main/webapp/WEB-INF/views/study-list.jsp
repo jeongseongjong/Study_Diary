@@ -19,6 +19,14 @@
 			document.location.href = "${rootPath}/insert"
 
 		})
+		
+		$(".list-content").click(function(){
+			
+			let id = $(this).data('id')
+			alert(id)
+			
+			document.location.href = "${rootPath}/detail?seq=" + id 
+		})
 
 	})
 </script>
@@ -27,12 +35,14 @@
 	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 	<div class="container">
 		<div class="bg-secondary list-title d-flex text-white">
+			<div class="col-2">번호</div>
 			<div class="col-2">카테고리</div>
 			<div class="col-3">제목</div>
 			<div class="col-5">내용</div>
 		</div>
 		<c:forEach items="${STUDY_LIST}" var="study">
-			<div class="list-content d-flex ">
+			<div class="list-content d-flex" data-id="${study.s_seq}">
+				<div class="col-2">${study.s_seq}</div>
 				<div class="col-2">${study.s_cate}</div>
 				<div class="col-3">${study.s_subject}</div>
 				<div class="col-5">${study.s_content}</div>

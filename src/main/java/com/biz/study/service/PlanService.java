@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.biz.study.dao.PlanDao;
+import com.biz.study.dao.UserDao;
 import com.biz.study.domain.PlanVO;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class PlanService {
 
 	private final PlanDao planDao;
+	private final UserDao userDao;
 	
 	public List<PlanVO> findByPSeq(long p_seq) {
 		
@@ -22,6 +24,7 @@ public class PlanService {
 
 	public int insert(PlanVO planVO) {
 
+		
 		return planDao.insert(planVO);
 	}
 }

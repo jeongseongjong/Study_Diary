@@ -12,7 +12,7 @@
 <body>
 	<c:forEach items="${PLAN_LIST}" var="plan">
 		<div class="list-content d-flex " data-id="${plan.p_seq}">
-			<div class="col-1">${plan.p_name}</div>
+			<div class="col-2">${plan.p_u_id}</div>
 			<div class="col-7">${plan.p_plan}</div>
 		</div>
 	</c:forEach>

@@ -35,6 +35,6 @@ public class PlanController {
 		
 		planService.insert(planVO);
 		
-		return "redirect:/plan/plan";
+		return "redirect:/plan/list";
 	}
 }

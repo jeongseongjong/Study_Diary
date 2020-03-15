@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.biz.study.domain.CommentVO;
 import com.biz.study.domain.StudyVO;
+import com.biz.study.service.CommentService;
 import com.biz.study.service.StudyService;
+import com.biz.study.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 public class StudyController {
 	
 	private final StudyService studyService;
+	private final UserService userService;
+	private final CommentService cmtService;
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(Model model) {
@@ -39,6 +44,8 @@ public class StudyController {
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST, produces = "text/html;charset=UTF-8")
 	public String insert(StudyVO studyVO) {
+		
+		log.debug("여기는 insert 전 기록 : " + studyVO);
 		
 		studyService.insert(studyVO);
 		
@@ -73,6 +80,23 @@ public class StudyController {
 		
 		return "redirect:/list";
 	}
+	 
+	@RequestMapping(value="/detail",method=RequestMethod.GET)
+	public String detail(@RequestParam(value="seq", required = false)String s_seq, Model model) {
+		
+		log.debug("컨트롤러 : " + s_seq);
 	
+		StudyVO studyVO = studyService.findBySeq(Long.valueOf(s_seq));
+		List<CommentVO> cmtList = cmtService.findBySId(studyVO.getS_seq());
+		
+		log.debug("디테일 : " +cmtList.toString());
+		log.debug("detail VO : " + studyVO);
+		
+		model.addAttribute("studyVO", studyVO);
+		model.addAttribute("CMT_LIST",cmtList);
+		
+		
+		return "study-detail";
+	}
 	
 }

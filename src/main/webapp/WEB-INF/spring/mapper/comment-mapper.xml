@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.study.dao.CommentDao">
+ 
+ 	<select id="findBySId" resultType="commentVO">
+ 		SELECT * FROM tbl_comment WHERE c_s_id = #{c_s_id}
+ 	</select>
+ 
+ 	<insert id="insert" parameterType="commentVO">
+ 	INSERT INTO tbl_comment(
+		 	c_seq,
+		 	c_s_id,
+		 	c_date,
+		 	c_auth,
+		 	c_content
+ 	) VALUES (
+ 			SEQ_COMMENT.NEXTVAL,
+ 			#{c_s_id,jdbcType=VARCHAR},
+ 			#{c_date,jdbcType=VARCHAR},
+ 			#{c_auth,jdbcType=VARCHAR},
+ 			#{c_content,jdbcType=VARCHAR}
+)
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="commentVO">
+ 	
+ 			UPDATE tbl_comment SET
+ 	
+			c_s_id = #{c_s_id,jdbcType=VARCHAR},
+			c_date= #{c_date,jdbcType=VARCHAR},
+			c_auth= #{c_auth,jdbcType=VARCHAR},
+			c_content= #{c_content,jdbcType=VARCHAR}
+	
+			WHERE c_seq = #{c_seq}
+ 	
+ 	</update>
+ 
+ </mapper> 

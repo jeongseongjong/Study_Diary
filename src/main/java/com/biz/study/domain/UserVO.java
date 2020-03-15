@@ -13,9 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Builder
-public class PlanVO {
+public class UserVO {
 
-	private long p_seq;
-	private String p_plan;
-	private String p_s_id;
+	private String u_id;
+	private String u_pw;
+	private String u_re_pw;
 }

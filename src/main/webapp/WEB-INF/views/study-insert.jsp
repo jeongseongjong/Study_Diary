@@ -15,7 +15,10 @@
 		<form method="POST">
 			<div class="form-group">
 				<div>
-					<input name="s_id" value="${STUDY.s_id}" placeholder="아이디">
+					<input type="hidden" name="s_seq" value="0">
+				</div>
+				<div>
+					<input name="s_auth" value="${STUDY.s_auth}" placeholder="작성자">
 				</div>
 				<div>
 					<input name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
@@ -24,7 +27,7 @@
 					<input name="s_content" value="${STUDY.s_content}" placeholder="내용">
 				</div>
 				<div>
-					<input name="s_content" value="${STUDY.s_cate}" placeholder="카테고리">
+					<input name="s_cate" value="${STUDY.s_cate}" placeholder="카테고리">
 				</div>
 				<%@ include file="/WEB-INF/views/plan/plan-insert.jsp" %>
 				<button>저장</button>

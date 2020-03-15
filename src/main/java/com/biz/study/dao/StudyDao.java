@@ -27,4 +27,5 @@ public interface StudyDao {
 	@Delete("delete from tbl_study where s_seq = #{s_seq}")
 	public int delete(long s_seq);
 
+
 }

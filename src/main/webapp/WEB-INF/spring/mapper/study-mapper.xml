@@ -8,24 +8,24 @@
  	<insert id="insert" parameterType="studyVO">
  	INSERT INTO tbl_study(
 		 	S_SEQ,
-			S_ID,
+			s_auth,
 			S_SUBJECT,
 			S_CONTENT,
 			S_CATE,
 			S_S_TIME,
 			S_F_TIME,
-			S_TIME
+			S_R_TIME
  	
  	) VALUES (
  			SEQ_STUDY.NEXTVAL,
 
-			#{s_id,jdbcType=VARCHAR},
+			#{s_auth,jdbcType=VARCHAR},
 			#{s_subject,jdbcType=VARCHAR},
 			#{s_content,jdbcType=VARCHAR},
 			#{s_cate,jdbcType=VARCHAR},
 			#{s_s_time,jdbcType=VARCHAR},
 			#{s_f_time,jdbcType=VARCHAR},
-			#{s_time,jdbcType=VARCHAR}
+			#{s_r_time,jdbcType=VARCHAR}
 )
  	</insert>
  	
@@ -33,13 +33,13 @@
  	
  	UPDATE tbl_study SET
  	
-			s_id = #{s_id,jdbcType=VARCHAR},
+			s_auth = #{s_auth,jdbcType=VARCHAR},
 			s_subject = #{s_subject,jdbcType=VARCHAR},
 			s_content = #{s_content,jdbcType=VARCHAR},
-			s_cate= #{s_cate,jdbcType=VARCHAR},
+			s_cate = #{s_cate,jdbcType=VARCHAR},
 			s_s_time = #{s_s_time,jdbcType=VARCHAR},
 			s_f_time = #{s_f_time,jdbcType=VARCHAR},
-			s_time = #{s_time,jdbcType=VARCHAR}
+			s_r_time = #{s_r_time,jdbcType=VARCHAR}
 	
 			WHERE s_seq = #{s_seq}
  	

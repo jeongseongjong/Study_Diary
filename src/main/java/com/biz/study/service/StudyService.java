@@ -53,6 +53,10 @@ public class StudyService {
 		return studyDao.delete(s_seq);
 	}
 
+	public StudyVO detail(long s_seq) {
+		
+		return studyDao.findBySeq(s_seq);
+	}
 	
 	
 }

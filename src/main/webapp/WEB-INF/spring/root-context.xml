@@ -5,4 +5,8 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+		<bean id="passwordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg index ="0" value="4" />
+		</bean>
 </beans>
