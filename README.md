@@ -48,6 +48,14 @@
  * insert시 form에 seq를 담아주지 않아도 mapper에서 담아주기 때문에 input에 해당하는값들이 자동으로 생성되는 seq를 찾아간다.(update할때는 seq필요)
  
  
+ # 2020-03-16
+ ## study update / delete & Interceptor
+ ### study udpate
+ * jsp에 보내주는 url(s_seq)를 정확히 보내줘야 값을 찾는다
+  괜히 이상한걸로 바꿔서 까먹지말자
+ * seq를 받아서 get으로 받고 update에 넣어 post로 보내줘야 한다.
+ ### Interceptor
+ * 정확히 path를 지정해줘서 혼동되는일이 없도록 하자
  
  
  

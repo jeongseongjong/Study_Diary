@@ -55,24 +55,30 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
-	public String update(@RequestParam("s_seq")String s_seq, Model model) {
+	public String update(@RequestParam("s_seq")long s_seq, Model model) {
 		
-		StudyVO studyVO = studyService.findBySeq(Long.valueOf(s_seq));
+		StudyVO studyVO = studyService.findBySeq(s_seq);
 		
 		model.addAttribute("STUDY", studyVO);
+		log.debug("여기는 update1" + studyVO);
 		
 		return "study-insert";
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String update(StudyVO studyVO) {
+	public String update(@RequestParam("s_seq")long s_seq, StudyVO studyVO) {
+		
+		log.debug("여기는 update2" + studyVO);
+		
+//		studyVO = studyService.findBySeq(s_seq);
 		
 		studyService.update(studyVO);
 		
 		return "redirect:/list";
 	}
 	
-	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	
+	@RequestMapping(value="/delete",method=RequestMethod.GET)
 	public String delete(long s_seq) {
 		
 		log.debug("딜리트가 되니마니 ");

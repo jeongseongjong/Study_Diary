@@ -22,10 +22,10 @@
 		$(document).on("click","button",function(){
 			let txt = $(this).text()
 			if(txt == '수정'){
-				document.location.href = "${rootPaht}/update?seq=${studyVO.s_seq}"
+				document.location.href = "${rootPath}/update?s_seq="+ ${studyVO.s_seq}
 			}else if(txt == '삭제'){
 				if(confirm("삭제하실 ?")){
-					document.location.href="${rootPath}/delete?seq=${studyVO.s_seq}"
+					document.location.href="${rootPath}/delete?s_seq=${studyVO.s_seq}"
 				}
 			}else if(txt == '저장'){
 				/*

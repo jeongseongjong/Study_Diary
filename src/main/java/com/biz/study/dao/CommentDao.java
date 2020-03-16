@@ -15,8 +15,6 @@ public interface CommentDao {
 	
 	public int insert(CommentVO cmtVO);
 	
-	public int update(CommentVO cmtVO);
-	
 	@Delete("delete from tbl_comment where c_seq = #{c_seq}")
 	public int delete(long c_seq);
 }

@@ -34,7 +34,7 @@ public class CommentController {
 		model.addAttribute("CMT_LIST", cmtList);
 		log.debug("댓글 리스트에용" + cmtList);
 		
-		return "study-detail";
+		return "comment/comment-list";
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
@@ -52,6 +52,8 @@ public class CommentController {
 		UserVO userVO = (UserVO) hSession.getAttribute("userVO");
 		
 		model.addAttribute("writer", userVO.getU_id());
+		
+		log.debug(userVO.getU_id());
 		model.addAttribute("id",cmtVO.getC_s_id());
 		return "redirect:/comment/list";
 		
