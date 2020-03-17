@@ -57,6 +57,28 @@
 									}
 								})
 								return true;
+							} else if (txt == '공부종료') {
+
+								if (!confirm("공부를 종료 할까요")) {
+									return false
+								}
+								
+								var fTime = $(".time").data("id")
+								
+								alert(fTime)
+								$.ajax({
+									url : "${rootPath}/update?s_seq="+ fTime,
+									data : {s_seq : fTime},
+									type : "POST",
+									success : function(result){
+										$("div.fTime").html(result)
+									},
+									error:function(){
+										alert("공부 종료 오류")
+									}
+									
+								})
+
 							}
 						})
 
@@ -67,8 +89,8 @@
 				return false
 			}
 
-			let c_seq = $(this).parent("div").data("id")
-
+			let c_seq = $(this).parent("div").data("c_seq")
+			alert(c_seq)
 			$.ajax({
 				url : "${rootPath}/comment/delete",
 				data : {
@@ -84,28 +106,6 @@
 				}
 			})
 		})
-
-		$(document).on("click", ".fTime", function() {
-			if (!confirm("공부를 종료하시겠습니까")) {
-				return false
-			}
-
-			let s_seq = $(this).attr("data-id")
-
-			$.ajax({
-				url : "${rootPath}/fTime",
-				data : {
-					s_seq : s_seq
-				},
-				type : "POST",
-				success : function(result) {
-					$("div.fTime").html(result)
-				},
-				error : function() {
-					alert("공부 종료 오류")
-				}
-			})
-		})
 	})
 </script>
 
@@ -113,26 +113,29 @@
 	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 
 	<div class="container">
-		<input type="hidden" name="${studyVO.s_seq}" id="${studyVO.s_seq}">
+		<input class="seq" type="hidden" name="${studyVO.s_seq}" data-id="${studyVO.s_seq}">
 		<div class="study-title col-9">제목 : ${studyVO.s_subject}</div>
 		<div class="study-title col-2">작성자 : ${studyVO.s_auth}</div>
 		<br />
 
 		<div class="study-title col-4">시작시간 : ${studyVO.s_s_time}</div>
-		<div data-id="${fVO.s_seq}" class="fTime">
-			<c:choose>
-				<c:when test="${!empty fVO.s_f_time}">
-					<div class="study-title col-4">종료시간 : ${fVO.s_f_time}</div>
-					<div class="study-title col-4">공부시간 : ${studyVO.s_s_time} -
-						${fVO.s_f_time}</div>
-				</c:when>
-				<c:otherwise>
-					<br />
-					<br />
-					<button type="button" class="btn btn-warning ml-3 finish">공부종료</button>
-				</c:otherwise>
-			</c:choose>
-		</div>
+		<form class="time" method="POST">
+			<div data-id="${fVO.s_seq}" class="fTime">
+				<c:choose>
+					<c:when test="${!empty fVO.s_f_time}">
+						<input type="hidden" name="s_f_time" id="s_f_time">
+						<div class="study-title col-4">종료시간 : ${fVO.s_f_time}</div>
+						<div class="study-title col-4">공부시간 : ${studyVO.s_s_time} -
+							${fVO.s_f_time}</div>
+					</c:when>
+					<c:otherwise>
+						<br />
+						<br />
+						<button type="button" class="btn btn-warning ml-3 finish">공부종료</button>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</form>
 		<div class="form-group d-flex justify-content-end">
 			<button class="btn btn-secondary mr-3">수정</button>
 			<button class="btn btn-secondary mr-3">삭제</button>

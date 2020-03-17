@@ -109,9 +109,9 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/fTime", method=RequestMethod.GET)
-	public String fTime(@RequestParam("s_seq")long s_seq, Model model) {
+	public String fTime(@RequestParam("s_seq")String s_seq, Model model) {
 		
-		StudyVO studyVO = studyService.findBySeq(s_seq);
+		StudyVO studyVO = studyService.findBySeq(Long.valueOf(s_seq));
 		
 		model.addAttribute("fVO",studyVO);
 		
