@@ -26,6 +26,7 @@ public class CommentService {
 		log.debug("서비스 : " +list.toString());
 		
 		return list;
+		
 	}
 
 	public int insert(CommentVO cmtVO) {

@@ -12,40 +12,99 @@
 </head>
 <style>
 .comment {
-	border : none;
+	border: none;
 	margin: 5px;
+}
+
+.cmt-item-del:hover {
+	cursor: pointer;
 }
 </style>
 
 <script>
-	$(function(){
-		$(document).on("click","button",function(){
-			let txt = $(this).text()
-			if(txt == '수정'){
-				document.location.href = "${rootPath}/update?s_seq="+ ${studyVO.s_seq}
-			}else if(txt == '삭제'){
-				if(confirm("삭제하실 ?")){
-					document.location.href="${rootPath}/delete?s_seq=${studyVO.s_seq}"
-				}
-			}else if(txt == '저장'){
-				/*
-					form태그에 있는 댓글 입력 데이터를 controller로 보내는 ajax
-				*/
-				var formData = $("form.main").serialize()
-				
-				$.ajax({
-					url : "${rootPath}/comment/insert",
-					data :  formData,
-					type : "POST",
-					success : function(result){
-						$("div.cmt-list").html(result)
-					},
-					error: function(){
-						alert("서버와 통신오류")
-					}
-				})
-				return true;
+	$(function() {
+		$(document)
+				.on(
+						"click",
+						"button",
+						function() {
+							let txt = $(this).text()
+							if (txt == '수정') {
+								document.location.href = "${rootPath}/update?s_seq="
+										+ $
+								{
+									studyVO.s_seq
+								}
+							} else if (txt == '삭제') {
+								if (confirm("삭제하실 ?")) {
+									document.location.href = "${rootPath}/delete?s_seq=${studyVO.s_seq}"
+								}
+							} else if (txt == '저장') {
+								/*
+									form태그에 있는 댓글 입력 데이터를 controller로 보내는 ajax
+								 */
+								var formData = $("form.main").serialize()
+
+								$.ajax({
+									url : "${rootPath}/comment/insert",
+									data : formData,
+									type : "POST",
+									success : function(result) {
+										$("div.cmt-list").html(result)
+									},
+									error : function() {
+										alert("서버와 통신오류")
+									}
+								})
+								return true;
+							}
+						})
+
+		$(document).on("click", ".cmt-item-del", function(event) {
+			event.stopPropagation()
+
+			if (!confirm("댓글을 삭제 할까요")) {
+				return false
 			}
+
+			let c_seq = $(this).parent("div").data("id")
+
+			$.ajax({
+				url : "${rootPath}/comment/delete",
+				data : {
+					c_seq : c_seq,
+					s_id : "${studyVO.s_seq}"
+				},
+				type : "POST",
+				success : function(result) {
+					$("div.cmt-list").html(result)
+				},
+				error : function() {
+					alert("댓글 삭제 오류")
+				}
+			})
+		})
+
+		$(document).on("click", ".fTime", function() {
+			if (!confirm("공부를 종료하시겠습니까")) {
+				return false
+			}
+
+			let s_seq = $(this).attr("data-id")
+
+			$.ajax({
+				url : "${rootPath}/fTime",
+				data : {
+					s_seq : s_seq
+				},
+				type : "POST",
+				success : function(result) {
+					$("div.fTime").html(result)
+				},
+				error : function() {
+					alert("공부 종료 오류")
+				}
+			})
 		})
 	})
 </script>
@@ -60,9 +119,20 @@
 		<br />
 
 		<div class="study-title col-4">시작시간 : ${studyVO.s_s_time}</div>
-		<div class="study-title col-4">종료시간</div>
-		<br />
-		<div class="study-title col-4">공부시간</div>
+		<div data-id="${fVO.s_seq}" class="fTime">
+			<c:choose>
+				<c:when test="${!empty fVO.s_f_time}">
+					<div class="study-title col-4">종료시간 : ${fVO.s_f_time}</div>
+					<div class="study-title col-4">공부시간 : ${studyVO.s_s_time} -
+						${fVO.s_f_time}</div>
+				</c:when>
+				<c:otherwise>
+					<br />
+					<br />
+					<button type="button" class="btn btn-warning ml-3 finish">공부종료</button>
+				</c:otherwise>
+			</c:choose>
+		</div>
 		<div class="form-group d-flex justify-content-end">
 			<button class="btn btn-secondary mr-3">수정</button>
 			<button class="btn btn-secondary mr-3">삭제</button>
@@ -71,8 +141,8 @@
 		</div>
 		<form class="main" method="POST">
 			<div class="row p-2">
-				<input type="hidden" name="c_seq" id="c_seq" value="0"> 
-				<input type="hidden" name="c_s_id" value="${studyVO.s_seq}">
+				<input type="hidden" name="c_seq" id="c_seq" value="0"> <input
+					type="hidden" name="c_s_id" value="${studyVO.s_seq}">
 				<div class="col-2">
 					<input name="c_content"
 						class="form-control comment border border-info" id="c_content"

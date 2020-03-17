@@ -4,7 +4,8 @@
 
 <c:forEach items="${CMT_LIST}" var="cmt">
 	<div class="row p-2 cmt-item" data-id="${cmt.c_s_id}">
-	 	<div class="col-9">${cmt.c_content}</div>
+	 	<div class="col-8">${cmt.c_content}</div>
 	 	<div class="col-3">${cmt.c_date}</div>
+	 	<div class="col-1 cmt-item-del">&times;</div>
 	</div>
 </c:forEach>

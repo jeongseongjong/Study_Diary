@@ -44,5 +44,21 @@
 			WHERE s_seq = #{s_seq}
  	
  	</update>
+ 	
+ 	<update id="fTime" parameterType="studyVO">
+ 	
+ 	UPDATE tbl_study SET
+ 	
+			s_auth = #{s_auth,jdbcType=VARCHAR},
+			s_subject = #{s_subject,jdbcType=VARCHAR},
+			s_content = #{s_content,jdbcType=VARCHAR},
+			s_cate = #{s_cate,jdbcType=VARCHAR},
+			s_s_time = #{s_s_time,jdbcType=VARCHAR},
+			s_f_time = #{s_f_time,jdbcType=VARCHAR},
+			s_r_time = #{s_r_time,jdbcType=VARCHAR}
+	
+			WHERE s_seq = #{s_seq}
+ 	
+ 	</update>
  
  </mapper> 

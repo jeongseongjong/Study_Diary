@@ -23,6 +23,8 @@ public interface StudyDao {
 	public int insert(StudyVO studyVO);
 
 	public int update(StudyVO studyVO);
+	
+	public int fTime(StudyVO studyVO);
 
 	@Delete("delete from tbl_study where s_seq = #{s_seq}")
 	public int delete(long s_seq);

@@ -26,7 +26,7 @@ public class CommentController {
 	private CommentService cmtService;
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public String list(String s_id, Model model) {
+	public String list(@RequestParam("s_id") String s_id, Model model) {
 		
 		long c_s_id = Long.valueOf(s_id);
 		
@@ -54,20 +54,20 @@ public class CommentController {
 		model.addAttribute("writer", userVO.getU_id());
 		
 		log.debug(userVO.getU_id());
-		model.addAttribute("id",cmtVO.getC_s_id());
+		model.addAttribute("s_id",cmtVO.getC_s_id());
 		return "redirect:/comment/list";
 		
 	}
 	
-	@RequestMapping(value="/delete",method=RequestMethod.GET)
-	public String delete(String c_seq, String s_id, Model model) {
+	@RequestMapping(value="/delete",method=RequestMethod.POST)
+	public String delete(String c_seq, @RequestParam("s_id")String s_seq, Model model) {
 	
 		// c_seq를 받아 해당하는 댓글에 대한 delete 수행
 		cmtService.delete(Long.valueOf(c_seq));
 		
 		// s_id를 model에 담아 list에 넘겨주고 삭제되면 리스트를 redirect해준다.
-		model.addAttribute("s_id",s_id);
+		model.addAttribute("s_id", s_seq);
 		
-		return "redirect:/comment/comment-list";
+		return "redirect:/comment/list";
 	}
 }

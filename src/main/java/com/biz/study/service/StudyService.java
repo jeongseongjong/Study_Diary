@@ -45,9 +45,19 @@ public class StudyService {
 		
 		studyVO.setS_s_time(ldt.format(dt).toString());
 		
-		return studyDao.update(studyVO);
+		return studyDao.fTime(studyVO);
 	}
 
+	public int fTime(StudyVO studyVO) {
+
+		LocalDateTime ldt = LocalDateTime.now();
+		DateTimeFormatter dt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		
+		studyVO.setS_s_time(ldt.format(dt).toString());
+		
+		return studyDao.insert(studyVO);
+	}
+	
 	public int delete(long s_seq) {
 
 		return studyDao.delete(s_seq);

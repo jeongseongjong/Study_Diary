@@ -2,6 +2,8 @@ package com.biz.study.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.biz.study.domain.CommentVO;
 import com.biz.study.domain.StudyVO;
+import com.biz.study.domain.UserVO;
 import com.biz.study.service.CommentService;
 import com.biz.study.service.StudyService;
 import com.biz.study.service.UserService;
@@ -87,7 +90,7 @@ public class StudyController {
 		return "redirect:/list";
 	}
 	 
-	@RequestMapping(value="/detail",method=RequestMethod.GET)
+	@RequestMapping(value="/detail",method=RequestMethod.GET, produces = "text/html;charset=UTF-8")
 	public String detail(@RequestParam(value="seq", required = false)String s_seq, Model model) {
 		
 		log.debug("컨트롤러 : " + s_seq);
@@ -105,4 +108,36 @@ public class StudyController {
 		return "study-detail";
 	}
 	
+	@RequestMapping(value="/fTime", method=RequestMethod.GET)
+	public String fTime(@RequestParam("s_seq")long s_seq, Model model) {
+		
+		StudyVO studyVO = studyService.findBySeq(s_seq);
+		
+		model.addAttribute("fVO",studyVO);
+		
+		return "study-detail";
+		
+	}
+	
+	@RequestMapping(value="/fTime",method=RequestMethod.POST)
+	public String fTime(@RequestParam("s_seq")long s_seq, StudyVO studyVO,HttpSession hSession,Model model) {
+		
+		studyService.update(studyVO);
+		
+
+		
+		log.debug("여기는 인서트 2 에용" + studyVO.toString());
+		
+		// 로그인 된 id를 가져오기위해 session에서 userVO를 가져와
+		// 재 cast를 해주어야 한다.
+		UserVO userVO = (UserVO) hSession.getAttribute("userVO");
+		
+		model.addAttribute("writer", userVO.getU_id());
+		
+		log.debug(userVO.getU_id());
+		model.addAttribute("s_id",studyVO.getS_seq());
+		
+		return "redirect:/detail?seq={s_seq}";
+		
+	}
 }
