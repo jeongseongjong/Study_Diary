@@ -1,5 +1,6 @@
 package com.biz.study.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -104,34 +105,35 @@ public class StudyController {
 		model.addAttribute("studyVO", studyVO);
 		model.addAttribute("CMT_LIST",cmtList);
 		
-		
 		return "study-detail";
 	}
 	
-	@RequestMapping(value="/fTime", method=RequestMethod.GET)
-	public String fTime(@RequestParam(value="s_seq",required=false)String s_seq, Model model) {
-		
-		StudyVO studyVO = studyService.findBySeq(Long.valueOf(s_seq));
-		
-		log.debug("여기는 fTime 1이에용" + studyVO.toString());
-		
-		model.addAttribute("fVO",studyVO);
-		
-		return "study-detail";
-		
-	}
+	
+	
+//	@RequestMapping(value="/fTime", method=RequestMethod.GET)
+//	public String fTime(@RequestParam(value="s_seq",required=false)String s_seq, Model model) {
+//		
+//		StudyVO studyVO = studyService.findBySeq(Long.valueOf(s_seq));
+//		
+//		log.debug("여기는 fTime 1이에용" + studyVO.toString());
+//		
+//		model.addAttribute("fVO",studyVO);
+//		
+//		return "study-detail";
+//		
+//	}
 	
 	@RequestMapping(value="/fTime",method=RequestMethod.POST)
-	public String fTime(@RequestParam(value="s_seq",required=false)long s_seq, StudyVO studyVO) {
+	public String fTime(@RequestParam(value="s_seq",required=false)long s_seq, Model model) throws ParseException {
 		
-		studyVO = studyService.findBySeq(s_seq);
+		StudyVO studyVO = studyService.findBySeq(s_seq);
 		studyService.fTime(studyVO);
 		
 		log.debug("여기는 fTime 2 에용" + studyVO.toString());
 		
+		model.addAttribute("studyVO", studyVO);
 		
-		
-		return "redirect:/detail";
+		return "study-update";
 		
 	}
 }

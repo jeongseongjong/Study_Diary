@@ -11,13 +11,13 @@ import com.biz.study.domain.StudyVO;
 @Mapper
 public interface StudyDao {
 
-	@Select("select * from tbl_study")
+	@Select("select * from tbl_study ORDER BY s_seq")
 	public List<StudyVO> selectAll();
 
 	@Select("select * from tbl_study where s_id = #{s_id} ")
 	public StudyVO findBySId(long s_id);
 	
-	@Select("select * from tbl_study where s_seq = #{s_seq} ")
+	@Select("select * from tbl_study where s_seq = #{s_seq} ORDER BY s_seq ")
 	public StudyVO findBySeq(long s_seq);
 
 	public int insert(StudyVO studyVO);

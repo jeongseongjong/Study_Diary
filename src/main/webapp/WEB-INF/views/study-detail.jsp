@@ -23,6 +23,7 @@
 
 <script>
 	$(function() {
+		
 		$(document)
 				.on(
 						"click",
@@ -43,6 +44,12 @@
 								/*
 									form태그에 있는 댓글 입력 데이터를 controller로 보내는 ajax
 								 */
+								 
+								var c_s_id = $(".seq").attr("data-id")
+								$("#c_s_id").val(c_s_id)
+									
+								alert(c_s_id)
+								
 								var formData = $("form.main").serialize()
 
 								$.ajax({
@@ -84,6 +91,41 @@
 				}
 			})
 		})
+		
+		$(document).on("click", "button", function() {
+			let text = $(this).text()
+			if (text == '공부종료') {
+				if (!confirm("공부를 종료하시겠습니까?")) {
+					return false
+				}
+
+				// 원래있던 comment input의 data-id를 id로 바꿔서 
+				// 위의 ajax에서 id에 val()을 넣어준다.
+				// 그렇게 되면 button에 해당하는곳에 data-id는 study-update에 하나밖에없기 때문에 s_seq가 지정된다.
+				var s_seq = $(this).data("id")
+
+				alert(s_seq)
+				$.ajax({
+					// controller의 RequestParam으로 설정해둔 s_seq를 가져오고
+					// data-id의값인 s_seq로 변수를 지정해준다.
+					url : "${rootPath}/fTime?s_seq=" + s_seq,
+					data : {
+						s_seq : s_seq
+					},
+					type : "POST",
+					success : function(result) {
+						// include로 날아오지면 detail에서 보여줘야 하기때문에 result를 html로 날려준다.
+						$(".study-detail").html(result)
+					},
+					error : function() {
+						alert("공부 종료 오류")
+					}
+
+				})
+
+			}
+		})
+		
 	})
 </script>
 
@@ -91,34 +133,11 @@
 	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 
 	<div class="container">
-		<input class="seq" type="hidden" name="${studyVO.s_seq}"
-			data-id="${studyVO.s_seq}">
-		<div class="study-title col-9">제목 : ${studyVO.s_subject}</div>
-		<div class="study-title col-2">작성자 : ${studyVO.s_auth}</div>
-		<br />
-
-		<div class="study-title col-4">시작시간 : ${studyVO.s_s_time}</div>
-		<form class="time" method="POST">
-			<div data-id="${studyVO.s_seq}" id="fTime">
-				<c:choose>
-					<c:when test="${!empty studyVO.s_f_time}">
-						<input type="hidden" name="s_seq" id="s_seq" value="0">
-						<input type="hidden" name="s_f_time" id="s_f_time"
-							value="${studyVO.s_f_time}">
-						<div class="study-title col-4" id="st_end">종료시간 :
-							${studyVO.s_f_time}</div>
-						<div class="study-title col-4">공부시간 : ${studyVO.s_s_time} -
-							${studyVO.s_f_time}</div>
-					</c:when>
-					<c:otherwise>
-						<br />
-						<br />
-						<button type="button" data-id="${studyVO.s_seq }"
-							class="btn btn-warning ml-3 finish">공부종료</button>
-					</c:otherwise>
-				</c:choose>
-			</div>
-		</form>
+		
+		<div class="study-detail">
+		<%@ include file="/WEB-INF/views/study-update.jsp" %>
+		</div>
+		
 		<div class="form-group d-flex justify-content-end">
 			<button class="btn btn-secondary mr-3">수정</button>
 			<button class="btn btn-secondary mr-3">삭제</button>
@@ -127,8 +146,8 @@
 		</div>
 		<form class="main" method="POST">
 			<div class="row p-2">
-				<input type="hidden" name="c_seq" id="c_seq" value="0"> <input
-					type="hidden" name="c_s_id" value="${studyVO.s_seq}">
+				<input type="hidden" name="c_seq" id="c_seq" value="0"> 
+				<input type="hidden" id="c_s_id" name="c_s_id">
 				<div class="col-2">
 					<input name="c_content"
 						class="form-control comment border border-info" id="c_content"

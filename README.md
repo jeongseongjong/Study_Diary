@@ -35,7 +35,8 @@
  * FK관계 이해도가 미흡하여 실패를 겪고 재수정하여 테이블 설계\
 
  ### Detail
- * seq를 long으로 하는데 Form에서 보내주는값이 기본 String형으로 되서 TypeMissMatch가 발생 -> view단에서 controller로 보낼때 long형으로 형변환 시켜야 할 칼럼은 value값을 0으로 설정하여 타입을 묶어서 보내줘야한다.
+ * seq를 long으로 하는데 Form에서 보내주는값이 기본 String형으로 되서 TypeMissMatch가 발생 -> view단에서 controller로 보낼때 
+ 	long형으로 형변환 시켜야 할 칼럼은 value값을 0으로 설정하여 타입을 묶어서 보내줘야한다.
  
  ### Comment
  * 로그인 된 id를 가져오기 위해 Session에 등록되어 있는 vo를 꺼내서 cast후에 vo에 값을 담아주어야 한다.
@@ -62,6 +63,12 @@
  ### 종료시간 ajax
  * 무참히 실패했다... 내일 하나하나 다시봐야겠다.
  
+ # 2020-03-18
+ ## 종료시간 ajax 성공
+ * 구분하기 쉽도록 study-update.jsp에 Diary를 빼서 detail.jsp에 include 한다.
+ * 버튼 클릭시 이벤트로 종료시간이 작성되도록 했다.
+ * 종료시간 - 시작시간 = 공부시간이 되기때문에 VO에 String으로 들어간 시간을 빼서 Date형으로 parse 하여 시간을 연산했고 String.format을 이용 String형으로 전환하여 VO에 다시 set했다.
+ * 목표 : UI정상화
  
  
  
