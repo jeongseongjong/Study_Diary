@@ -24,6 +24,7 @@
 	
 	<context:component-scan base-package="com.biz.study.controller" />
 	<context:component-scan base-package="com.biz.study.service" />
+	<context:component-scan base-package="com.biz.study.interceptor" />
 	
 	
 	

@@ -57,28 +57,6 @@
 									}
 								})
 								return true;
-							} else if (txt == '공부종료') {
-
-								if (!confirm("공부를 종료 할까요")) {
-									return false
-								}
-								
-								var fTime = $(".time").data("id")
-								
-								alert(fTime)
-								$.ajax({
-									url : "${rootPath}/update?s_seq="+ fTime,
-									data : {s_seq : fTime},
-									type : "POST",
-									success : function(result){
-										$("div.fTime").html(result)
-									},
-									error:function(){
-										alert("공부 종료 오류")
-									}
-									
-								})
-
 							}
 						})
 
@@ -113,25 +91,30 @@
 	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 
 	<div class="container">
-		<input class="seq" type="hidden" name="${studyVO.s_seq}" data-id="${studyVO.s_seq}">
+		<input class="seq" type="hidden" name="${studyVO.s_seq}"
+			data-id="${studyVO.s_seq}">
 		<div class="study-title col-9">제목 : ${studyVO.s_subject}</div>
 		<div class="study-title col-2">작성자 : ${studyVO.s_auth}</div>
 		<br />
 
 		<div class="study-title col-4">시작시간 : ${studyVO.s_s_time}</div>
 		<form class="time" method="POST">
-			<div data-id="${fVO.s_seq}" class="fTime">
+			<div data-id="${studyVO.s_seq}" id="fTime">
 				<c:choose>
-					<c:when test="${!empty fVO.s_f_time}">
-						<input type="hidden" name="s_f_time" id="s_f_time">
-						<div class="study-title col-4">종료시간 : ${fVO.s_f_time}</div>
+					<c:when test="${!empty studyVO.s_f_time}">
+						<input type="hidden" name="s_seq" id="s_seq" value="0">
+						<input type="hidden" name="s_f_time" id="s_f_time"
+							value="${studyVO.s_f_time}">
+						<div class="study-title col-4" id="st_end">종료시간 :
+							${studyVO.s_f_time}</div>
 						<div class="study-title col-4">공부시간 : ${studyVO.s_s_time} -
-							${fVO.s_f_time}</div>
+							${studyVO.s_f_time}</div>
 					</c:when>
 					<c:otherwise>
 						<br />
 						<br />
-						<button type="button" class="btn btn-warning ml-3 finish">공부종료</button>
+						<button type="button" data-id="${studyVO.s_seq }"
+							class="btn btn-warning ml-3 finish">공부종료</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

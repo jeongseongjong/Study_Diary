@@ -73,7 +73,7 @@ public class StudyController {
 		
 		log.debug("여기는 update2" + studyVO);
 		
-//		studyVO = studyService.findBySeq(s_seq);
+		studyVO = studyService.findBySeq(s_seq);
 		
 		studyService.update(studyVO);
 		
@@ -109,9 +109,11 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/fTime", method=RequestMethod.GET)
-	public String fTime(@RequestParam("s_seq")String s_seq, Model model) {
+	public String fTime(@RequestParam(value="s_seq",required=false)String s_seq, Model model) {
 		
 		StudyVO studyVO = studyService.findBySeq(Long.valueOf(s_seq));
+		
+		log.debug("여기는 fTime 1이에용" + studyVO.toString());
 		
 		model.addAttribute("fVO",studyVO);
 		
@@ -120,24 +122,16 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/fTime",method=RequestMethod.POST)
-	public String fTime(@RequestParam("s_seq")long s_seq, StudyVO studyVO,HttpSession hSession,Model model) {
+	public String fTime(@RequestParam(value="s_seq",required=false)long s_seq, StudyVO studyVO) {
 		
-		studyService.update(studyVO);
+		studyVO = studyService.findBySeq(s_seq);
+		studyService.fTime(studyVO);
 		
-
+		log.debug("여기는 fTime 2 에용" + studyVO.toString());
 		
-		log.debug("여기는 인서트 2 에용" + studyVO.toString());
 		
-		// 로그인 된 id를 가져오기위해 session에서 userVO를 가져와
-		// 재 cast를 해주어야 한다.
-		UserVO userVO = (UserVO) hSession.getAttribute("userVO");
 		
-		model.addAttribute("writer", userVO.getU_id());
-		
-		log.debug(userVO.getU_id());
-		model.addAttribute("s_id",studyVO.getS_seq());
-		
-		return "redirect:/detail?seq={s_seq}";
+		return "redirect:/detail";
 		
 	}
 }
