@@ -36,16 +36,16 @@
 	<div class="container">
 		<div class="bg-secondary list-title d-flex text-white">
 			<div class="col-2">번호</div>
-			<div class="col-2">카테고리</div>
+			<div class="col-2">작성자</div>
 			<div class="col-3">제목</div>
-			<div class="col-5">내용</div>
+			<div class="col-3">작성시각</div>
 		</div>
 		<c:forEach items="${STUDY_LIST}" var="study">
 			<div class="list-content d-flex" data-id="${study.s_seq}">
 				<div class="col-2">${study.s_seq}</div>
-				<div class="col-2">${study.s_cate}</div>
+				<div class="col-2">${study.s_auth}</div>
 				<div class="col-3">${study.s_subject}</div>
-				<div class="col-5">${study.s_content}</div>
+				<div class="col-3">${study.s_s_time }</div>
 			</div>
 		</c:forEach>
 		<hr/>

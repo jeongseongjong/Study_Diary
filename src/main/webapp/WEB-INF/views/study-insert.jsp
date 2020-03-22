@@ -15,25 +15,32 @@
 		<form method="POST">
 			<div class="form-group">
 				<div>
-					<input type="hidden" name="s_seq" value="0">
+					<input type="hidden" name="s_auth" value="${STUDY.s_auth}">
+					<input type="hidden" name="s_s_time" value="${STUDY.s_s_time}">
 				</div>
 				<div>
-					<input name="s_auth" value="${STUDY.s_auth}" placeholder="작성자">
+					<select name="s_cate" >
+						<option>경찰 / 소방 공무원</option>
+						<option>공무원</option>
+						<option>사법고시</option>
+						<option>행정고시</option>
+						<option>임용고시</option>
+						<option>학생</option>
+						<option>기타</option>
+					</select>
 				</div>
 				<div>
 					<input name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
 				</div>
 				<div>
-					<input name="s_content" value="${STUDY.s_content}" placeholder="내용">
+					<textarea class="row-5"name="s_content" 
+						placeholder="내용"></textarea>
 				</div>
-				<div>
-					<input name="s_cate" value="${STUDY.s_cate}" placeholder="카테고리">
-				</div>
-				<%@ include file="/WEB-INF/views/plan/plan-insert.jsp" %>
+				<%@ include file="/WEB-INF/views/plan/plan-insert.jsp"%>
 				<button>저장</button>
 			</div>
 		</form>
-		
+
 	</div>
 </body>
 </html>

@@ -47,11 +47,11 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	public String insert(StudyVO studyVO) {
+	public String insert(StudyVO studyVO, HttpSession session) {
 		
 		log.debug("여기는 insert 전 기록 : " + studyVO);
 		
-		studyService.insert(studyVO);
+		studyService.insert(studyVO, session);
 		
 		log.debug("여기는 인서트 기록 : " + studyVO);
 		
@@ -70,11 +70,9 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/update",method=RequestMethod.POST)
-	public String update(@RequestParam("s_seq")long s_seq, StudyVO studyVO) {
+	public String update(StudyVO studyVO) {
 		
 		log.debug("여기는 update2" + studyVO);
-		
-		studyVO = studyService.findBySeq(s_seq);
 		
 		studyService.update(studyVO);
 		
@@ -124,7 +122,7 @@ public class StudyController {
 //	}
 	
 	@RequestMapping(value="/fTime",method=RequestMethod.POST)
-	public String fTime(@RequestParam(value="s_seq",required=false)long s_seq, Model model) throws ParseException {
+	public String fTime(@RequestParam(value="s_seq",required=false)long s_seq, Model model, HttpSession session, UserVO userVO) throws ParseException {
 		
 		StudyVO studyVO = studyService.findBySeq(s_seq);
 		studyService.fTime(studyVO);

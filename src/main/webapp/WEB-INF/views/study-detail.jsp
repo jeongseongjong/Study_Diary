@@ -14,10 +14,25 @@
 .comment {
 	border: none;
 	margin: 5px;
+	width:100%;
+}
+
+.btn-cmt-save {
+	float : right;
 }
 
 .cmt-item-del:hover {
 	cursor: pointer;
+}
+
+.form-group{
+	width:70%;
+	margin:0%;
+	float : right;
+	margin-top:30px;
+}
+.row{
+	width:100%;
 }
 </style>
 
@@ -137,12 +152,12 @@
 		<div class="study-detail">
 		<%@ include file="/WEB-INF/views/study-update.jsp" %>
 		</div>
-		
 		<div class="form-group d-flex justify-content-end">
-			<button class="btn btn-secondary mr-3">수정</button>
-			<button class="btn btn-secondary mr-3">삭제</button>
-			<button class="btn btn-secondary mr-3">답글</button>
-			<button class="btn btn-secondary">목록으로</button>
+			<a href="${rootPath}/update?s_seq=${studyVO.s_seq}"><button class="btn btn-secondary mr-3">수정</button></a>
+			<a href="${rootPath}/delete?s_seq=${studyVO.s_seq}"><button class="btn btn-secondary mr-3">삭제</button></a>
+			<a href="${rootPath}/"><button class="btn btn-secondary">목록으로</button></a>
+			<button type="button" data-id="${studyVO.s_seq }"
+					class="btn btn-warning ml-3 finish">공부종료</button>
 		</div>
 		<form class="main" method="POST">
 			<div class="row p-2">

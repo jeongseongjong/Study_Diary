@@ -19,6 +19,15 @@
 				
 				<ref bean="auth"/>
 			</mvc:interceptor>
+			<mvc:interceptor>
+				<mvc:mapping path="/insert*"/>
+				
+				<mvc:exclude-mapping path="/user/login*"/>
+				<mvc:exclude-mapping path="/user/logout*"/>
+				<mvc:exclude-mapping path="/user/join*"/>
+				
+				<ref bean="auth"/>
+			</mvc:interceptor>
 		</mvc:interceptors>
 		
 </beans>

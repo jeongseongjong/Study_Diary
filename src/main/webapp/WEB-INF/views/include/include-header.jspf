@@ -2,10 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<style>
+.nav-link{
+	color:white;
+}
+</style>
 <header class="jumbotron text-center bg-dark text-white">
 	<h1>Study Diary Service</h1>
 	<h3>여러분의 꿈을 실현할 곳</h3>
-	<nav class="navbar row float-right navbar-expand-sm bg-dark text-red">
+	<nav class="navbar float-right navbar-expand-sm bg-dark text-red">
 		<ul class="navbar-nav ml-2">
 			<li class="nav-item"><a href="#" class="nav-link">Diary List</a>
 			</li>
@@ -21,13 +26,11 @@
 				</c:when>
 
 				<c:otherwise>
-					<li class="nav-item"><a href="#" class="nav-link">My Page</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">${userVO.u_id}</a></li>
-					<li class="nav-item"><a href="${rootPath}/user/login" class="nav-link">로그아웃</a></li>
+					<li class="nav-item "><a href="#" class="nav-link">My Page</a></li>
+					<li class="nav-item "><a href="#" class="nav-link">${userVO.u_id} 님</a></li>
+					<li class="nav-item "><a href="${rootPath}/user/login" class="nav-link">로그아웃</a></li>
 				</c:otherwise>
 			</c:choose>
-			<li class="nav-item"><input class="form-control" type="text"
-				name="search" placeholder="Search"></li>
 		</ul>
 	</nav>
 </header>
