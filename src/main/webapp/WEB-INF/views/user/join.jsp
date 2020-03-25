@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Document</title>
 <!-- 컨테이너 및 main-subject, sub-title 설정 요소 값들-->
 
@@ -15,6 +16,7 @@
 <!-- 로그인 요소를 일부 사용하고 아래에서 재설정했습니다. 순서대로 배치해주세요.-->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 	$(function() {
 		
@@ -52,10 +54,15 @@
 		})
 	})
 </script>
-<%@ include file="/WEB-INF/views/include/include-head.jspf"%>
+<!-- 컨테이너 및 main-subject, sub-title 설정 요소 값들-->
+<link rel="stylesheet" href="${rootPath}/css/main.css">
+
+<!-- 로그인 페이지 요소 설정 값들-->
+<!-- 로그인 요소를 일부 사용하고 아래에서 재설정했습니다. 순서대로 배치해주세요.-->
+<link rel="stylesheet" href="${rootPath}/css/login.css">
+<link rel="stylesheet" href="${rootPath}/css/join.css">
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 	<fieldset>
 		<div class="container">
 			<div class="login-box">
@@ -77,7 +84,7 @@
 						<form:errors path="u_pw" class="in-error" />	
 					</div>
 					<div>
-						<input type="password" id="u_re_pw"
+						<input type="password" id="u_re_pw" class="text-box-warning"
 							placeholder="비밀번호를 다시한번 입력하세요">
 						<form:errors path="u_re_pw" class="in-error" />
 					</div>

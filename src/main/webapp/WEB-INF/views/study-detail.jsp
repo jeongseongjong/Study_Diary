@@ -13,32 +13,37 @@
 <style>
 .comment {
 	border: none;
-	margin: 5px;
-	width:100%;
+	width:650%;
+}
+
+.comment-between {
+	display: flex;
+	justify-content: space-between;
 }
 
 .btn-cmt-save {
-	float : right;
+	float: right;
 }
 
 .cmt-item-del:hover {
 	cursor: pointer;
 }
 
-.form-group{
-	width:70%;
-	margin:0%;
-	float : right;
-	margin-top:30px;
+.form-group {
+	width: 70%;
+	margin: 0%;
+	float: right;
+	margin-top: 30px;
 }
-.row{
-	width:100%;
+
+.row {
+	width: 100%;
 }
 </style>
 
 <script>
 	$(function() {
-		
+
 		$(document)
 				.on(
 						"click",
@@ -59,12 +64,11 @@
 								/*
 									form태그에 있는 댓글 입력 데이터를 controller로 보내는 ajax
 								 */
-								 
+
 								var c_s_id = $(".seq").attr("data-id")
 								$("#c_s_id").val(c_s_id)
-									
-								alert(c_s_id)
-								
+
+
 								var formData = $("form.main").serialize()
 
 								$.ajax({
@@ -90,7 +94,6 @@
 			}
 
 			let c_seq = $(this).parent("div").data("c_seq")
-			alert(c_seq)
 			$.ajax({
 				url : "${rootPath}/comment/delete",
 				data : {
@@ -106,7 +109,7 @@
 				}
 			})
 		})
-		
+
 		$(document).on("click", "button", function() {
 			let text = $(this).text()
 			if (text == '공부종료') {
@@ -119,7 +122,6 @@
 				// 그렇게 되면 button에 해당하는곳에 data-id는 study-update에 하나밖에없기 때문에 s_seq가 지정된다.
 				var s_seq = $(this).data("id")
 
-				alert(s_seq)
 				$.ajax({
 					// controller의 RequestParam으로 설정해둔 s_seq를 가져오고
 					// data-id의값인 s_seq로 변수를 지정해준다.
@@ -140,7 +142,7 @@
 
 			}
 		})
-		
+
 	})
 </script>
 
@@ -148,23 +150,25 @@
 	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 
 	<div class="container">
-		
+
 		<div class="study-detail">
-		<%@ include file="/WEB-INF/views/study-update.jsp" %>
+			<%@ include file="/WEB-INF/views/study-update.jsp"%>
 		</div>
 		<div class="form-group d-flex justify-content-end">
-			<a href="${rootPath}/update?s_seq=${studyVO.s_seq}"><button class="btn btn-secondary mr-3">수정</button></a>
-			<a href="${rootPath}/delete?s_seq=${studyVO.s_seq}"><button class="btn btn-secondary mr-3">삭제</button></a>
-			<a href="${rootPath}/"><button class="btn btn-secondary">목록으로</button></a>
+			<a href="${rootPath}/update?s_seq=${studyVO.s_seq}"><button
+					class="btn btn-secondary mr-3">수정</button></a> <a
+				href="${rootPath}/delete?s_seq=${studyVO.s_seq}"><button
+					class="btn btn-secondary mr-3">삭제</button></a> <a href="${rootPath}/"><button
+					class="btn btn-secondary">목록으로</button></a>
 			<button type="button" data-id="${studyVO.s_seq }"
-					class="btn btn-warning ml-3 finish">공부종료</button>
+				class="btn btn-warning ml-3 finish">공부종료</button>
 		</div>
 		<form class="main" method="POST">
-			<div class="row p-2">
-				<input type="hidden" name="c_seq" id="c_seq" value="0"> 
-				<input type="hidden" id="c_s_id" name="c_s_id">
-				<div class="col-2">
-					<input name="c_content"
+			<div class="row p-2 comment-between">
+				<input type="hidden" name="c_seq" id="c_seq" value="0"> <input
+					type="hidden" id="c_s_id" name="c_s_id">
+				<div class="col-2 comment">
+					<input type="text" name="c_content"
 						class="form-control comment border border-info" id="c_content"
 						placeholder="댓글">
 				</div>

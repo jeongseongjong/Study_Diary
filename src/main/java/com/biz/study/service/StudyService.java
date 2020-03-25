@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import com.biz.study.dao.StudyDao;
+import com.biz.study.domain.PageVO;
 import com.biz.study.domain.StudyVO;
 import com.biz.study.domain.UserVO;
 
@@ -85,7 +86,7 @@ public class StudyService {
 		long minute = sec / 60;
 		
 		// long to String 하기위해 format해준다.
-		String time = String.format("0%d:0%d:0%d", hour,minute,sec);
+		String time = String.format("%d:%d:%d", hour,minute,sec);
 		
 		// 연산된 시간을 VO에 넣어준다.
 		studyVO.setS_r_time(time);
@@ -101,6 +102,18 @@ public class StudyService {
 	public StudyVO detail(long s_seq) {
 
 		return studyDao.findBySeq(s_seq);
+	}
+
+	public long totalCount() {
+		
+		return studyDao.proTotalCount();
+	}
+
+	public List<StudyVO> selectPage(PageVO pageVO) {
+
+		List<StudyVO> studyList = studyDao.selectPage(pageVO);
+		
+		return studyList ;
 	}
 
 }

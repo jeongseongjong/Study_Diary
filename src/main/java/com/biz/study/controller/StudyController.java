@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.biz.study.domain.CommentVO;
+import com.biz.study.domain.PageVO;
 import com.biz.study.domain.StudyVO;
 import com.biz.study.domain.UserVO;
 import com.biz.study.service.CommentService;
+import com.biz.study.service.PageService;
 import com.biz.study.service.StudyService;
 import com.biz.study.service.UserService;
 
@@ -29,13 +31,24 @@ public class StudyController {
 	private final StudyService studyService;
 	private final UserService userService;
 	private final CommentService cmtService;
+	private final PageService pageService;
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String list(Model model) {
+	
+	@RequestMapping(value="list",method=RequestMethod.GET)
+																// 현재 페이지 번호를 value값으로 지정하고 기본값을 1로 지정해준다.(NPE 방지용)
+	public String studyList(Model model, StudyVO studyVO,@RequestParam(value="currentPageNo", required = false, defaultValue = "1") int currentPageNo) {
 		
-		List<StudyVO> studyList = studyService.selectAll();
-		log.debug("스터디 리스트 : " + studyList);
-		model.addAttribute("STUDY_LIST", studyList);
+		// 데이터 총 개수를 가져와 선언
+		long totalCount = studyService.totalCount();
+		
+		// 총 데이터 개수와 현재 페이지 번호를 가져와 VO에 담는다.
+		PageVO pageVO = pageService.getPagination(totalCount, currentPageNo);
+		
+		// 담겨진 VO를 조건select에 주입하여 리스트로 뽑아낸다.
+		List<StudyVO> sList = studyService.selectPage(pageVO);
+		
+		model.addAttribute("STUDY_LIST",sList);
+		model.addAttribute("pageVO" , pageVO);
 		
 		return "study-list";
 	}

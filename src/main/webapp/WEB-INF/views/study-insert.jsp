@@ -9,6 +9,28 @@
 <%@ include file="/WEB-INF/views/include/include-head.jspf"%>
 <title>□□□ 나의 JSP 페이지 □□□</title>
 </head>
+<style>
+.area {
+	margin-top:10px;
+}
+
+.subject {
+	margin-top:10px;
+}
+
+.save {
+	float : right;
+}
+
+.container{
+	width:768px;
+}
+
+input.subject{
+	width:100%;
+}
+
+</style>
 <body>
 	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 	<div class="container">
@@ -18,7 +40,7 @@
 					<input type="hidden" name="s_auth" value="${STUDY.s_auth}">
 					<input type="hidden" name="s_s_time" value="${STUDY.s_s_time}">
 				</div>
-				<div>
+				<div class="cate">
 					<select name="s_cate" >
 						<option>경찰 / 소방 공무원</option>
 						<option>공무원</option>
@@ -29,15 +51,14 @@
 						<option>기타</option>
 					</select>
 				</div>
-				<div>
-					<input name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
+				<div class="subject">
+					<input class="subject" name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
 				</div>
-				<div>
-					<textarea class="row-5"name="s_content" 
+				<div class="area">
+					<textarea class="area" style="width:100%" rows="5" name="s_content" 
 						placeholder="내용"></textarea>
 				</div>
-				<%@ include file="/WEB-INF/views/plan/plan-insert.jsp"%>
-				<button>저장</button>
+				<button class="btn btn-success save">저장</button>
 			</div>
 		</form>
 

@@ -3,34 +3,59 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <style>
-.nav-link{
-	color:white;
+.nav-link {
+	color: white;
+}
+.navbar{
+	padding-top:330px;
+}
+.src {
+	background-image: url("${rootPath}/css/head.jpg");
+	width:90%;
+	height:370px;
+	background-size:cover;
+	margin-left:5%;
+	margin-top:2%;
+	
+}
+
+.top-title {
+display:flex;
+
 }
 </style>
-<header class="jumbotron text-center bg-dark text-white">
-	<h1>Study Diary Service</h1>
-	<h3>여러분의 꿈을 실현할 곳</h3>
-	<nav class="navbar float-right navbar-expand-sm bg-dark text-red">
-		<ul class="navbar-nav ml-2">
-			<li class="nav-item"><a href="#" class="nav-link">Diary List</a>
-			</li>
+<header>
+	<div class="top-title">
+		<div class="src">
+			<div class="nav-title">
+				<nav class="navbar float-right navbar-expand-sm">
+					<ul class="navbar-nav ml-2">
+						<li class="nav-item"><a href="#" class="nav-link">Diary
+								List</a></li>
 
-			<li class="nav-item"><a href="#" class="nav-link">Week
-					Ranking</a></li>
-			<c:choose>
-				<c:when test="${userVO == null || userVO.u_id == null }">
-					<li class="nav-item"><a id="login"
-						href="${rootPath}/user/login" class="nav-link">login</a></li>
-					<li class="nav-item"><a href="${rootPath}/user/join"
-						class="nav-link">join</a></li>
-				</c:when>
+						<li class="nav-item"><a href="#" class="nav-link">Week
+								Ranking</a></li>
+						<c:choose>
+							<c:when test="${userVO == null || userVO.u_id == null }">
+								<li class="nav-item"><a id="login"
+									href="${rootPath}/user/login" class="nav-link">login</a></li>
+								<li class="nav-item"><a href="${rootPath}/user/join"
+									class="nav-link">join</a></li>
+							</c:when>
 
-				<c:otherwise>
-					<li class="nav-item "><a href="#" class="nav-link">My Page</a></li>
-					<li class="nav-item "><a href="#" class="nav-link">${userVO.u_id} 님</a></li>
-					<li class="nav-item "><a href="${rootPath}/user/login" class="nav-link">로그아웃</a></li>
-				</c:otherwise>
-			</c:choose>
-		</ul>
-	</nav>
+							<c:otherwise>
+								<li class="nav-item "><a href="#" class="nav-link">My
+										Page</a></li>
+								<li class="nav-item "><a href="#" class="nav-link">${userVO.u_id}
+										님</a></li>
+								<li class="nav-item "><a href="${rootPath}/user/login"
+									class="nav-link">로그아웃</a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	</div>
 </header>

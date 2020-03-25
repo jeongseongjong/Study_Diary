@@ -5,6 +5,21 @@
   
  <mapper namespace="com.biz.study.dao.StudyDao">
  
+ 	<select id="selectPage" resultType="studyVO">
+ 	SELECT * FROM
+ 		(
+ 			SELECT /* + FIRST_ROWS_100 */ ROWNUM AS NUM, IP.* FROM
+ 			(
+ 				SELECT /*+ INDEX_DESC(S) */ * FROM tbl_study S
+ 			)IP
+ 			WHERE ROWNUM &lt;= #{limit,jdbcType=VARCHAR}
+ 		)TBL
+ 		
+ 		WHERE NUM &gt;= #{offset,jdbcType=VARCHAR}
+ 		
+ 	</select>
+ 
+ 
  	<insert id="insert" parameterType="studyVO">
  	INSERT INTO tbl_study(
 		 	S_SEQ,

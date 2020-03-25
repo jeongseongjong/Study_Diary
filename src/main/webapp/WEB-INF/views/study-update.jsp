@@ -11,12 +11,15 @@
 .content {
 	border: 1px solid #ccc;
 	border-radius: 3px;
-	
+}
+.detail-list {
+	font-size: 25px;
+	border: bold;
 }
 </style>
 </head>
 <body>
-	<div>
+	<div class="detail-list">
 		<input class="seq" type="hidden" name="${studyVO.s_seq}"
 			data-id="${studyVO.s_seq}">
 		<div class="study-title ">제목 : ${studyVO.s_subject}</div>
