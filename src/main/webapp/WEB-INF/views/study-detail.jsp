@@ -133,6 +133,8 @@
 					success : function(result) {
 						// include로 날아오지면 detail에서 보여줘야 하기때문에 result를 html로 날려준다.
 						$(".study-detail").html(result)
+						// alert(result.s_f_time)
+						
 					},
 					error : function() {
 						alert("공부 종료 오류")

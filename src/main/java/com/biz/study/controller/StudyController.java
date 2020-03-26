@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.biz.study.domain.CommentVO;
 import com.biz.study.domain.PageVO;
@@ -134,6 +135,7 @@ public class StudyController {
 //		
 //	}
 	
+	// @ResponseBody
 	@RequestMapping(value="/fTime",method=RequestMethod.POST)
 	public String fTime(@RequestParam(value="s_seq",required=false)long s_seq, Model model, HttpSession session, UserVO userVO) throws ParseException {
 		
