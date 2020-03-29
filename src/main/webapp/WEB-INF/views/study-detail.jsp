@@ -13,7 +13,7 @@
 <style>
 .comment {
 	border: none;
-	width:650%;
+	width: 650%;
 }
 
 .comment-between {
@@ -67,7 +67,6 @@
 
 								var c_s_id = $(".seq").attr("data-id")
 								$("#c_s_id").val(c_s_id)
-
 
 								var formData = $("form.main").serialize()
 
@@ -134,7 +133,7 @@
 						// include로 날아오지면 detail에서 보여줘야 하기때문에 result를 html로 날려준다.
 						$(".study-detail").html(result)
 						// alert(result.s_f_time)
-						
+
 					},
 					error : function() {
 						alert("공부 종료 오류")
@@ -162,8 +161,10 @@
 				href="${rootPath}/delete?s_seq=${studyVO.s_seq}"><button
 					class="btn btn-secondary mr-3">삭제</button></a> <a href="${rootPath}/"><button
 					class="btn btn-secondary">목록으로</button></a>
-			<button type="button" data-id="${studyVO.s_seq }"
-				class="btn btn-warning ml-3 finish">공부종료</button>
+			<c:if test="${empty studyVO.s_f_time}">
+				<button type="button" data-id="${studyVO.s_seq }"
+					class="btn btn-warning ml-3 finish">공부종료</button>
+			</c:if>
 		</div>
 		<form class="main" method="POST">
 			<div class="row p-2 comment-between">

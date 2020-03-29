@@ -4,10 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Service;
 
 import com.biz.study.dao.CommentDao;
 import com.biz.study.domain.CommentVO;
+import com.biz.study.domain.StudyVO;
+import com.biz.study.domain.UserVO;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,15 +33,15 @@ public class CommentService {
 		
 	}
 
-	public int insert(CommentVO cmtVO) {
+	public int insert(CommentVO cmtVO, HttpSession session) {
 		LocalDateTime ldt = LocalDateTime.now();
 
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 		cmtVO.setC_date(ldt.format(df).toString());
-		int ret = cmtDao.insert(cmtVO);
 		
-		return ret;
+		cmtVO.setC_auth(((UserVO) session.getAttribute("userVO")).getU_id());
+		return cmtDao.insert(cmtVO);
 	}
 
 	public int delete(long c_seq) {

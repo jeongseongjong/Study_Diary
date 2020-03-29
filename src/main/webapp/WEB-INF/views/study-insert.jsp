@@ -17,6 +17,9 @@
 .subject {
 	margin-top:10px;
 }
+.cate {
+	margin-top:20px;
+}
 
 .save {
 	float : right;
@@ -55,8 +58,7 @@ input.subject{
 					<input class="subject" name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
 				</div>
 				<div class="area">
-					<textarea class="area" style="width:100%" rows="5" name="s_content" 
-						placeholder="내용"></textarea>
+					<%@ include file="/WEB-INF/views/plan/plan-insert.jsp" %>
 				</div>
 				<button class="btn btn-success save">저장</button>
 			</div>

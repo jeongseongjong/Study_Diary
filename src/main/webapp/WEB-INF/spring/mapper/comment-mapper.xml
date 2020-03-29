@@ -5,6 +5,7 @@
   
  <mapper namespace="com.biz.study.dao.CommentDao">
  
+ 
  	<select id="findBySId" resultType="commentVO">
  		SELECT * FROM tbl_comment WHERE c_s_id = #{c_s_id} ORDER BY c_seq DESC
  	</select>

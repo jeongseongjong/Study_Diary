@@ -30,11 +30,9 @@ display:flex;
 			<div class="nav-title">
 				<nav class="navbar float-right navbar-expand-sm">
 					<ul class="navbar-nav ml-2">
-						<li class="nav-item"><a href="#" class="nav-link">Diary
+						<li class="nav-item"><a href="${rootPath}/list" class="nav-link">Diary
 								List</a></li>
 
-						<li class="nav-item"><a href="#" class="nav-link">Week
-								Ranking</a></li>
 						<c:choose>
 							<c:when test="${userVO == null || userVO.u_id == null }">
 								<li class="nav-item"><a id="login"
@@ -44,8 +42,6 @@ display:flex;
 							</c:when>
 
 							<c:otherwise>
-								<li class="nav-item "><a href="#" class="nav-link">My
-										Page</a></li>
 								<li class="nav-item "><a href="#" class="nav-link">${userVO.u_id}
 										님</a></li>
 								<li class="nav-item "><a href="${rootPath}/user/login"

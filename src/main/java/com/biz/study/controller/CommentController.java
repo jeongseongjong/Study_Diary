@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.biz.study.domain.CommentVO;
 import com.biz.study.domain.UserVO;
 import com.biz.study.service.CommentService;
+import com.biz.study.service.StudyService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,14 +26,19 @@ public class CommentController {
 	@Autowired
 	private CommentService cmtService;
 	
+	@Autowired
+	private StudyService studyService;
+	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
-	public String list(@RequestParam("s_id") String s_id, Model model) {
+	public String list(@RequestParam("s_id") String s_id, Model model, HttpSession session, String s_auth) {
 		
 		long c_s_id = Long.valueOf(s_id);
 		
 		List<CommentVO> cmtList = cmtService.findBySId(c_s_id);
+		String s_c_auth = (String) session.getAttribute(s_auth);
 		model.addAttribute("CMT_LIST", cmtList);
 		log.debug("댓글 리스트에용" + cmtList);
+		log.debug("댓글리스트의 작성자에요" + s_c_auth);
 		
 		return "comment/comment-list";
 	}
@@ -43,7 +49,7 @@ public class CommentController {
 		
 		log.debug("여기는 인서트 에용" + cmtVO.toString());
 		
-		int ret = cmtService.insert(cmtVO);
+		int ret = cmtService.insert(cmtVO, hSession);
 		
 		log.debug("여기는 인서트 2 에용" + cmtVO.toString());
 		

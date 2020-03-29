@@ -10,12 +10,18 @@
 <title>□□□ 나의 JSP 페이지 □□□</title>
 </head>
 <body>
-	<form method="POST">
-		<div class="form-group">
-			<div>
-				<input name="p_plan" value="${plan.p_plan}" placeholder="계획을 작성하세요">
+	<div>
+		<form method="POST">
+			<div class="form-group">
+				<input type="hidden" name="p_s_id" value="0">
+				<div>
+					<input name="p_plan" placeholder="계획을 작성하세요">
+					<input name="p_plan" placeholder="계획을 작성하세요">
+					<input name="p_plan" placeholder="계획을 작성하세요">
+					<input name="p_plan" placeholder="계획을 작성하세요">
+				</div>
 			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 </body>
 </html>

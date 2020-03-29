@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +11,27 @@
 </head>
 <body>
 <body>
-	<c:forEach items="${PLAN_LIST}" var="plan">
-		<div class="list-content d-flex " data-id="${plan.p_seq}">
-			<div class="col-2">${plan.p_u_id}</div>
-			<div class="col-7">${plan.p_plan}</div>
-		</div>
-	</c:forEach>
-	<hr />
+	<div>
+		<c:forEach items="${PLAN_LIST}" var="plan" varStatus="index">
+			<div class="list-content d-flex">
+				<div class="col-2">&curren; &nbsp;</div>
+				<div class="col-8 check-div">
+					<c:choose>
+						<c:when test="${plan.p_complete == 1 }">
+							<span style="text-decoration: line-through">${plan.p_plan}</span>
+						</c:when>
+						<c:otherwise>
+							<span style="text-decoration: none">${plan.p_plan}</span>
+						</c:otherwise>
+					</c:choose>
+					<input type="checkbox" class="check-box" name="p_complete"
+						data-id="${p_id}" id="c_complete_${index.index}"
+						data-com="${p_complete}">
+				</div>
+			</div>
+		</c:forEach>
+		<hr />
+	</div>
 </body>
 </body>
 </html>

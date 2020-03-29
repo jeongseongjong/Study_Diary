@@ -12,11 +12,39 @@
 	border: 1px solid #ccc;
 	border-radius: 3px;
 }
+
 .detail-list {
 	font-size: 25px;
 	border: bold;
 }
 </style>
+<script>
+	$(function() {
+		
+		$("input:checkbox").on("click", function(e) {
+			e.stopPropagtion();
+			var p_id = $(this).data("id")
+			var p_complete = $(this).data("com")
+			alert(p_id)
+
+			$.ajax({
+				url : "${rootPath}/plan/checkBox",
+				data : {
+					p_id : p_id,
+					p_complete : p_complete
+				},
+				type : 'POST',
+				success : function() {
+					location.reload()
+				},
+				error : function() {
+					alert("체크박스 오류")
+				}
+			})
+			return false
+		})
+	})
+</script>
 </head>
 <body>
 	<div class="detail-list">
@@ -28,7 +56,7 @@
 		<br />
 
 		<div class="study-title">시작시간 : ${studyVO.s_s_time}</div>
-		
+
 		<c:choose>
 			<c:when test="${!empty studyVO.s_f_time}">
 
@@ -44,11 +72,18 @@
 				<div class="study-title">공부시간 : ${studyVO.s_r_time}</div>
 			</c:when>
 		</c:choose>
-		<div >
+		<div>
+			<div>
+				
+
+			</div>
+			<div>
+				<%@ include file="/WEB-INF/views/plan/plan-list.jsp"%>
+			</div>
 			<div class="study-title">내용</div>
 			<div class="study-title  mt-1 mb-2 content">${studyVO.s_content}</div>
 		</div>
-		
+
 	</div>
 </body>
 </html>

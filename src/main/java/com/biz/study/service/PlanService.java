@@ -15,11 +15,15 @@ import lombok.RequiredArgsConstructor;
 public class PlanService {
 
 	private final PlanDao planDao;
-	private final UserDao userDao;
 	
-	public List<PlanVO> findByPSeq(long p_seq) {
+	public List<PlanVO> selectAll(){
 		
-		return planDao.findByPSeq(p_seq);
+		return planDao.selectAll();
+	}
+	
+	public List<PlanVO> findByPId(long p_s_id) {
+		
+		return planDao.findByPId(p_s_id);
 	}
 
 	public int insert(PlanVO planVO) {
@@ -27,4 +31,14 @@ public class PlanService {
 		
 		return planDao.insert(planVO);
 	}
+	
+	public int checkBox(PlanVO planVO) {
+		if(planVO.getP_complete() == 1) {
+			planVO.setP_complete(0);
+		}else {
+			planVO.setP_complete(1);
+		}
+		return planDao.checkBox(planVO);
+	}
+	
 }

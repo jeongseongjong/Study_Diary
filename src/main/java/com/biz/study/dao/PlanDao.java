@@ -10,10 +10,15 @@ import com.biz.study.domain.PlanVO;
 @Mapper
 public interface PlanDao {
 
-	@Select("select * from tbl_study_plan where p_seq = #{p_seq}")
-	public List<PlanVO> findByPSeq(long p_seq);
+	@Select("select * from tbl_study_plan")
+	public List<PlanVO> selectAll();
+	
+	@Select("select * from tbl_study_plan where p_s_id= #{p_s_id}")
+	public List<PlanVO> findByPId(long p_s_id);
 	
 	public int insert(PlanVO planVO);
 	
 	public int delete(long p_seq);
+	
+	public int checkBox(PlanVO planVO);
 }
