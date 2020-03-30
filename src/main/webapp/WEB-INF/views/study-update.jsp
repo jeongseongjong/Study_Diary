@@ -20,17 +20,17 @@
 </style>
 <script>
 	$(function() {
-		
+
 		$("input:checkbox").on("click", function(e) {
 			e.stopPropagtion();
-			var p_id = $(this).data("id")
+			var p_s_id = $(this).data("id")
 			var p_complete = $(this).data("com")
 			alert(p_id)
 
 			$.ajax({
 				url : "${rootPath}/plan/checkBox",
 				data : {
-					p_id : p_id,
+					p_s_id : p_s_id,
 					p_complete : p_complete
 				},
 				type : 'POST',
@@ -73,15 +73,15 @@
 			</c:when>
 		</c:choose>
 		<div>
+			<div class="study-title">내용</div>
 			<div>
-				
-
+				<%@ include file="/WEB-INF/views/plan/plan-insert.jsp"%>
 			</div>
-			<div>
+			<div class="p-4 plan-list">
 				<%@ include file="/WEB-INF/views/plan/plan-list.jsp"%>
 			</div>
-			<div class="study-title">내용</div>
 			<div class="study-title  mt-1 mb-2 content">${studyVO.s_content}</div>
+
 		</div>
 
 	</div>

@@ -66,6 +66,7 @@
 								 */
 
 								var c_s_id = $(".seq").attr("data-id")
+								alert(c_s_id)
 								$("#c_s_id").val(c_s_id)
 
 								var formData = $("form.main").serialize()
@@ -82,7 +83,33 @@
 									}
 								})
 								return true;
-							}
+							}else if (txt == '계획작성') {
+								/*
+								form태그에 있는 댓글 입력 데이터를 controller로 보내는 ajax
+							 */
+
+							var p_s_id = $(".seq").attr("data-id")
+							alert(p_s_id)
+							
+							$("#p_s_id").val(p_s_id)
+							
+
+							var formData = $("form.main").serialize()
+							alert(formData)
+
+							$.ajax({
+								url : "${rootPath}/plan/insert",
+								data : formData,
+								type : "POST",
+								success : function(result) {
+									$("div.plan-list").html(result)
+								},
+								error : function() {
+									alert("계획작성 오류")
+								}
+							})
+							return true;
+						}
 						})
 
 		$(document).on("click", ".cmt-item-del", function(event) {
@@ -166,18 +193,7 @@
 					class="btn btn-warning ml-3 finish">공부종료</button>
 			</c:if>
 		</div>
-		<form class="main" method="POST">
-			<div class="row p-2 comment-between">
-				<input type="hidden" name="c_seq" id="c_seq" value="0"> <input
-					type="hidden" id="c_s_id" name="c_s_id">
-				<div class="col-2 comment">
-					<input type="text" name="c_content"
-						class="form-control comment border border-info" id="c_content"
-						placeholder="댓글">
-				</div>
-				<button type="button" class="btn btn-success btn-cmt-save">저장</button>
-			</div>
-		</form>
+		<%@ include file="/WEB-INF/views/comment/comment-insert.jsp" %>
 		<div class="p-4 cmt-list">
 			<%@ include file="/WEB-INF/views/comment/comment-list.jsp"%>
 		</div>

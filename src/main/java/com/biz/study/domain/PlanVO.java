@@ -16,7 +16,7 @@ import lombok.ToString;
 public class PlanVO {
 
 	private long p_seq;
+	private long p_s_id;
 	private String p_plan;
-	private String p_s_id;
 	private long p_complete;
 }

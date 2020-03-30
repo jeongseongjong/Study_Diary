@@ -106,6 +106,10 @@
  * insert가 되지않는다.
   > - controller에서 log가 찍히지 않는걸 보니 insert가 제대로 넘어가지 않는것으로 예상
   > - 이번주 수업에 배웠던 checkBox와 일전에 수업 때 배웠던 댓글 Ajax를 바탕으로 구현 하고자 했으나 아직 미흡 
- 
+  
+# 2020-03-30
+## plan insert후 select (Ajax)
+ * insert의 Ajax 성공
+ * list를 p_s_id로 받아와서 뽑아줘야 하지만 실패 
  
  

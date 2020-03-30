@@ -8,14 +8,14 @@
  	<insert id="insert" parameterType="planVO">
  	INSERT INTO tbl_plan(
 		 	p_seq,
+		 	p_s_id,
 		 	p_plan,
-		 	p_u_id,
-		 	p_s_id
+		 	p_complete
  	) VALUES (
  			SEQ_PLAN.NEXTVAL,
+ 			#{p_s_id,jdbcType=VARCHAR},
  			#{p_plan,jdbcType=VARCHAR},
- 			#{p_u_id,jdbcType=VARCHAR},
- 			#{p_s_id,jdbcType=VARCHAR}
+ 			#{p_complete,jdbcType=VARCHAR}
 )
  	</insert>
  	
@@ -23,9 +23,9 @@
  	
  			UPDATE tbl_plan SET
  	
-			p_plan = #{p_plan,jdbcType=VARCHAR},
-			p_u_id= #{p_u_id,jdbcType=VARCHAR},
-			p_s_id= #{p_s_id,jdbcType=VARCHAR}
+			p_s_id = #{p_s_id,jdbcType=VARCHAR},
+			p_plan= #{p_plan,jdbcType=VARCHAR},
+			p_complete= #{p_complete,jdbcType=VARCHAR}
 	
 			WHERE p_seq = #{p_seq}
  	

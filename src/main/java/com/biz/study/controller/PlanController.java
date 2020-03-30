@@ -23,19 +23,21 @@ public class PlanController {
 	private final PlanService planService;
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list(@RequestParam("p_s_id") String p_s_id, Model model) {
+	public String list(@RequestParam(value="p_s_id", required = false)long p_s_id, Model model) {
 		
+		long p_id = Long.valueOf(p_s_id);
+		log.debug("여기는 p_s_id" + p_id);
 		
-		List<PlanVO> planList = planService.findByPId(Long.valueOf(p_s_id));
+		List<PlanVO> planList = planService.findByPId(p_id);
 		model.addAttribute("PLAN_LIST", planList);
-		
+		log.debug("여기는 검색 " + planList);
 		return "plan/plan-list";
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.GET)
 	public String insert() {
 
-		return "plan/plan-insert";
+		return "detail";
 	}
 	
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
@@ -48,7 +50,7 @@ public class PlanController {
 	}
 	
 	@RequestMapping(value="/checkBox",method=RequestMethod.GET)
-	public String checkBox(long p_s_id, Model model) {
+	public String checkBox(@RequestParam("p_s_id")long p_s_id, Model model) {
 		
 		List<PlanVO> planVO = planService.findByPId(p_s_id);
 		model.addAttribute("CHECK", planVO);
