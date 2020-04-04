@@ -10,14 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.biz.study.domain.CommentVO;
 import com.biz.study.domain.PageVO;
+import com.biz.study.domain.PlanVO;
 import com.biz.study.domain.StudyVO;
 import com.biz.study.domain.UserVO;
 import com.biz.study.service.CommentService;
 import com.biz.study.service.PageService;
+import com.biz.study.service.PlanService;
 import com.biz.study.service.StudyService;
 import com.biz.study.service.UserService;
 
@@ -33,6 +34,7 @@ public class StudyController {
 	private final UserService userService;
 	private final CommentService cmtService;
 	private final PageService pageService;
+	private final PlanService planService;
 	
 	
 	@RequestMapping(value="list",method=RequestMethod.GET)
@@ -110,12 +112,20 @@ public class StudyController {
 	
 		StudyVO studyVO = studyService.findBySeq(Long.valueOf(s_seq));
 		List<CommentVO> cmtList = cmtService.findBySId(studyVO.getS_seq());
+		List<PlanVO> planList = planService.findByPId(Long.valueOf(s_seq));
+
 		
 		log.debug("디테일 : " +cmtList.toString());
 		log.debug("detail VO : " + studyVO);
 		
 		model.addAttribute("studyVO", studyVO);
 		model.addAttribute("CMT_LIST",cmtList);
+		/*
+		 *  다른 페이지에서 작업을 하더라도(insert 또는 list) detail Controller에서 detail.jsp로 보내기때문에
+		 *  그안에서 list를 뽑으려면 해당 controller에서도 list를 보내줘야한다. 
+		 */
+		model.addAttribute("PLAN_LIST", planList);
+
 		
 		return "study-detail";
 	}

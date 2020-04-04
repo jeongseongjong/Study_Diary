@@ -13,16 +13,6 @@
 <style>
 .comment {
 	border: none;
-	width: 650%;
-}
-
-.comment-between {
-	display: flex;
-	justify-content: space-between;
-}
-
-.btn-cmt-save {
-	float: right;
 }
 
 .cmt-item-del:hover {
@@ -43,12 +33,10 @@
 
 <script>
 	$(function() {
-
-		$(document)
-				.on(
-						"click",
-						"button",
-						function() {
+		
+		$(document).on("click",	"button",function() {
+			
+			
 							let txt = $(this).text()
 							if (txt == '수정') {
 								document.location.href = "${rootPath}/update?s_seq="
@@ -89,19 +77,19 @@
 							 */
 
 							var p_s_id = $(".seq").attr("data-id")
-							alert(p_s_id)
 							
 							$("#p_s_id").val(p_s_id)
 							
 
 							var formData = $("form.main").serialize()
-							alert(formData)
+							console.log("요청 >> ", formData)
 
 							$.ajax({
 								url : "${rootPath}/plan/insert",
 								data : formData,
 								type : "POST",
 								success : function(result) {
+									console.log("result >> ", result)
 									$("div.plan-list").html(result)
 								},
 								error : function() {
@@ -181,6 +169,12 @@
 
 		<div class="study-detail">
 			<%@ include file="/WEB-INF/views/study-update.jsp"%>
+		</div>
+		<div class="p-4 plan-list">
+			<%@ include file="/WEB-INF/views/plan/plan-list.jsp" %>
+		</div>
+		<div>
+			<%@ include file="/WEB-INF/views/plan/plan-insert.jsp" %>
 		</div>
 		<div class="form-group d-flex justify-content-end">
 			<a href="${rootPath}/update?s_seq=${studyVO.s_seq}"><button

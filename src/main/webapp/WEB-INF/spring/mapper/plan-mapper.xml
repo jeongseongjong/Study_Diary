@@ -2,33 +2,42 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="com.biz.study.dao.PlanDao">
- 
- 	<insert id="insert" parameterType="planVO">
- 	INSERT INTO tbl_plan(
-		 	p_seq,
-		 	p_s_id,
-		 	p_plan,
-		 	p_complete
- 	) VALUES (
- 			SEQ_PLAN.NEXTVAL,
- 			#{p_s_id,jdbcType=VARCHAR},
- 			#{p_plan,jdbcType=VARCHAR},
- 			#{p_complete,jdbcType=VARCHAR}
-)
- 	</insert>
- 	
- 	<update id="update" parameterType="planVO">
- 	
- 			UPDATE tbl_plan SET
- 	
-			p_s_id = #{p_s_id,jdbcType=VARCHAR},
-			p_plan= #{p_plan,jdbcType=VARCHAR},
-			p_complete= #{p_complete,jdbcType=VARCHAR}
-	
-			WHERE p_seq = #{p_seq}
- 	
- 	</update>
- 
- </mapper> 
+
+<mapper namespace="com.biz.study.dao.PlanDao">
+
+	<insert id="insert" parameterType="planVO">
+		INSERT INTO tbl_plan(
+		p_seq,
+		p_s_id,
+		p_plan,
+		p_complete
+		) VALUES (
+		SEQ_PLAN.NEXTVAL,
+		#{p_s_id,jdbcType=VARCHAR},
+		#{p_plan,jdbcType=VARCHAR},
+		#{p_complete,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="planVO">
+
+		UPDATE tbl_plan SET
+
+		p_s_id = #{p_s_id,jdbcType=VARCHAR},
+		p_plan= #{p_plan,jdbcType=VARCHAR},
+		p_complete= #{p_complete,jdbcType=VARCHAR}
+
+		WHERE p_seq = #{p_seq}
+
+	</update>
+
+	<update id="checkBox" parameterType="planVO">
+		UPDATE tbl_plan SET
+
+		p_complete = #{p_complete,jdbcType=VARCHAR}
+
+		where p_seq = #{p_seq}
+	</update>
+
+
+</mapper> 

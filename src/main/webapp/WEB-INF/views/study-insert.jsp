@@ -57,9 +57,6 @@ input.subject{
 				<div class="subject">
 					<input class="subject" name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
 				</div>
-				<div class="area">
-					<%@ include file="/WEB-INF/views/plan/plan-insert.jsp" %>
-				</div>
 				<button class="btn btn-success save">저장</button>
 			</div>
 		</form>

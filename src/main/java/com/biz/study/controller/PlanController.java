@@ -23,12 +23,11 @@ public class PlanController {
 	private final PlanService planService;
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
-	public String list(@RequestParam(value="p_s_id", required = false)long p_s_id, Model model) {
+	public String list(@RequestParam(value="p_s_id",required = false, defaultValue = "0")long p_s_id,
+						@RequestParam(value="p_seq",required = false, defaultValue = "0")long p_seq, Model model) {
 		
-		long p_id = Long.valueOf(p_s_id);
-		log.debug("여기는 p_s_id" + p_id);
-		
-		List<PlanVO> planList = planService.findByPId(p_id);
+		log.debug("p_s_id가 정녕 안오는것인가" + p_s_id);
+		List<PlanVO> planList = planService.findByPId(p_s_id);
 		model.addAttribute("PLAN_LIST", planList);
 		log.debug("여기는 검색 " + planList);
 		return "plan/plan-list";
@@ -45,6 +44,25 @@ public class PlanController {
 		log.debug("여기는 플랜 인서트 1번"+ planVO) ;
 		planService.insert(planVO);
 		log.debug("여기는 플랜 인서트 2번"+ planVO) ;
+		log.debug("여기는 insert의 p_s_id" + planVO.getP_s_id());
+		
+		model.addAttribute("p_s_id",planVO.getP_s_id());
+		
+		return "redirect:/plan/list";
+	}
+	
+	
+	@RequestMapping(value="/selectData",method=RequestMethod.GET)
+	public String selectData() {
+
+		return "detail";
+	}
+	
+	@RequestMapping(value="/selectData",method=RequestMethod.POST)
+	public String selectData(@RequestParam(value="planVO", required = false)PlanVO planVO,Model model) {
+		log.debug("여기는 플랜 셀렉트 1번"+ planVO) ;
+		
+		model.addAttribute("p_s_id",planVO.getP_s_id());
 		
 		return "redirect:/plan/list";
 	}
@@ -59,8 +77,10 @@ public class PlanController {
 	}
 	
 	@RequestMapping(value="/checkBox",method=RequestMethod.POST)
-	public String checkBox(PlanVO planVO) {
+	public String checkBox(@RequestParam("p_seq")long p_seq,PlanVO planVO) {
 		planService.checkBox(planVO);
+		log.debug("여기는 체크박스의 planVO " +planVO);
+		log.debug("여기는 체크박스의 p_seq " +planVO.getP_seq());
 		
 		return "redirect:/plan/list";
 	}

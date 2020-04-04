@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%@ include file="/WEB-INF/views/include/include-head.jspf"%>
 <title>Insert title here</title>
 </head>
 <body>
@@ -14,7 +16,7 @@
 			<div class="row p-2 comment-between">
 				<input type="hidden" name="c_seq" id="c_seq" value="0"> <input
 					type="hidden" id="c_s_id" name="c_s_id">
-				<div class="col-2 comment">
+				<div class="col-10 comment">
 					<input type="text" name="c_content"
 						class="form-control comment border border-info" id="c_content"
 						placeholder="댓글">

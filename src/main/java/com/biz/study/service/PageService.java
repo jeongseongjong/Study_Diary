@@ -8,7 +8,7 @@ import com.biz.study.domain.PageVO;
 public class PageService {
 
 	private int listPerPage = 10; // 한 페이지에 보여질 데이터 개수
-	private int pageCount = 2; // 화면하단에 페이지 버튼 개수
+	private int pageCount =10; // 화면하단에 페이지 버튼 개수
 	
 //	public PageService(int listPerPage, int pageCount) {
 //		this.listPerPage = listPerPage;

@@ -111,5 +111,15 @@
 ## plan insert후 select (Ajax)
  * insert의 Ajax 성공
  * list를 p_s_id로 받아와서 뽑아줘야 하지만 실패 
- 
+
+# 2020-04-03
+## plan list 추출 & 성공시 체크 -> 취소선
+ * detail.jsp에서 화면 추출시 바로 plan list가 보여져야 하지만 insert후에 list가 추출되는 현상발생
+  > - detail에 보내주는 controller에서 planlist를 model에 안보내줬기 때문
+ * 성공시 체크하면 Cancel라인이 그어져야하는데 하나 체크시 모든 리스트가 그어지는현상 발생
+  > - FK되있는 p_s_id로 가져와서 complete했기때문에 p_s_id로 중복되잇는것 모두 취소선이 되었다.
+  > - seq를 받아서 complete 넘겨줘야한다.
+  
+# 2020-04-05
+## UI 수정
  

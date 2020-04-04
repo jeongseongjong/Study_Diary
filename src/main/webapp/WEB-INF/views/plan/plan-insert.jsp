@@ -16,7 +16,7 @@
 			<div class="row p-2 ">
 				<input type="hidden" name="plan_seq" id="plan_seq"> <input
 					type="hidden" id="p_s_id" name="p_s_id">
-				<div class="col-2 plan">
+				<div class="col-10 plan">
 					<input type="text" name="p_plan"
 						class="form-control plan border border-info" id="p_plan"
 						placeholder="계획을 작성하세요">
