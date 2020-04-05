@@ -54,7 +54,6 @@
 								 */
 
 								var c_s_id = $(".seq").attr("data-id")
-								alert(c_s_id)
 								$("#c_s_id").val(c_s_id)
 
 								var formData = $("form.main").serialize()
@@ -64,7 +63,7 @@
 									data : formData,
 									type : "POST",
 									success : function(result) {
-										$("div.cmt-list").html(result)
+										$("div.cmt-list").html(result);
 									},
 									error : function() {
 										alert("서버와 통신오류")
@@ -82,14 +81,12 @@
 							
 
 							var formData = $("form.main").serialize()
-							console.log("요청 >> ", formData)
 
 							$.ajax({
 								url : "${rootPath}/plan/insert",
 								data : formData,
 								type : "POST",
 								success : function(result) {
-									console.log("result >> ", result)
 									$("div.plan-list").html(result)
 								},
 								error : function() {
