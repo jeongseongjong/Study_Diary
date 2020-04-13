@@ -33,22 +33,29 @@
 
 <script>
 	$(function() {
-		
-		$(document).on("click",	"button",function() {
-			
-			
+
+		$(document)
+				.on(
+						"click",
+						"button",
+						function() {
+
 							let txt = $(this).text()
 							if (txt == '수정') {
-								document.location.href = "${rootPath}/update?s_seq="
-										+ $
-								{
-									studyVO.s_seq
+								if (confirm("수정하시겠습니까 ?")) {
+									document.location.href = "${rootPath}/update?s_seq="
+											+ $
+									{
+										studyVO.s_seq
+									}
 								}
+
 							} else if (txt == '삭제') {
-								if (confirm("삭제하실 ?")) {
+								if (confirm("삭제하시겠습니까 ?")) {
 									document.location.href = "${rootPath}/delete?s_seq=${studyVO.s_seq}"
 								}
-							} else if (txt == '저장') {
+
+							} else if (txt == '댓글작성') {
 								/*
 									form태그에 있는 댓글 입력 데이터를 controller로 보내는 ajax
 								 */
@@ -70,31 +77,30 @@
 									}
 								})
 								return true;
-							}else if (txt == '계획작성') {
+							} else if (txt == '계획작성') {
 								/*
 								form태그에 있는 댓글 입력 데이터를 controller로 보내는 ajax
-							 */
+								 */
 
-							var p_s_id = $(".seq").attr("data-id")
-							
-							$("#p_s_id").val(p_s_id)
-							
+								var p_s_id = $(".seq").attr("data-id")
 
-							var formData = $("form.main").serialize()
+								$("#p_s_id").val(p_s_id)
 
-							$.ajax({
-								url : "${rootPath}/plan/insert",
-								data : formData,
-								type : "POST",
-								success : function(result) {
-									$("div.plan-list").html(result)
-								},
-								error : function() {
-									alert("계획작성 오류")
-								}
-							})
-							return true;
-						}
+								var formData = $("form.main").serialize()
+
+								$.ajax({
+									url : "${rootPath}/plan/insert",
+									data : formData,
+									type : "POST",
+									success : function(result) {
+										$("div.plan-list").html(result)
+									},
+									error : function() {
+										alert("계획작성 오류")
+									}
+								})
+								return true;
+							}
 						})
 
 		$(document).on("click", ".cmt-item-del", function(event) {
@@ -168,10 +174,10 @@
 			<%@ include file="/WEB-INF/views/study-update.jsp"%>
 		</div>
 		<div class="p-4 plan-list">
-			<%@ include file="/WEB-INF/views/plan/plan-list.jsp" %>
+			<%@ include file="/WEB-INF/views/plan/plan-list.jsp"%>
 		</div>
 		<div>
-			<%@ include file="/WEB-INF/views/plan/plan-insert.jsp" %>
+			<%@ include file="/WEB-INF/views/plan/plan-insert.jsp"%>
 		</div>
 		<div class="form-group d-flex justify-content-end">
 			<a href="${rootPath}/update?s_seq=${studyVO.s_seq}"><button
@@ -179,12 +185,14 @@
 				href="${rootPath}/delete?s_seq=${studyVO.s_seq}"><button
 					class="btn btn-secondary mr-3">삭제</button></a> <a href="${rootPath}/"><button
 					class="btn btn-secondary">목록으로</button></a>
-			<c:if test="${empty studyVO.s_f_time}">
-				<button type="button" data-id="${studyVO.s_seq }"
-					class="btn btn-warning ml-3 finish">공부종료</button>
-			</c:if>
+			<c:choose>
+				<c:when test="${empty studyVO.s_f_time || studyVO.s_f_time == null}">
+					<button type="button" data-id="${studyVO.s_seq }"
+						class="btn btn-warning ml-3 finish">공부종료</button>
+				</c:when>
+			</c:choose>
 		</div>
-		<%@ include file="/WEB-INF/views/comment/comment-insert.jsp" %>
+		<%@ include file="/WEB-INF/views/comment/comment-insert.jsp"%>
 		<div class="p-4 cmt-list">
 			<%@ include file="/WEB-INF/views/comment/comment-list.jsp"%>
 		</div>

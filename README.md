@@ -32,7 +32,7 @@
 # 2020-03-15
 ## 테이블 재수정 & Detail & Comment
 ### 테이블 재수정
- * FK관계 이해도가 미흡하여 실패를 겪고 재수정하여 테이블 설계\
+ * FK관계 이해도가 미흡하여 실패를 겪고 재수정하여 테이블 설계
 
 ### Detail
  * seq를 long으로 하는데 Form에서 보내주는값이 기본 String형으로 되서 TypeMissMatch가 발생 -> view단에서 controller로 보낼때 
@@ -120,6 +120,4 @@
   > - FK되있는 p_s_id로 가져와서 complete했기때문에 p_s_id로 중복되잇는것 모두 취소선이 되었다.
   > - seq를 받아서 complete 넘겨줘야한다.
   
-# 2020-04-05
-## UI 수정
  

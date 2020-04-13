@@ -49,7 +49,6 @@ public class StudyController {
 		
 		// 담겨진 VO를 조건select에 주입하여 리스트로 뽑아낸다.
 		List<StudyVO> sList = studyService.selectPage(pageVO);
-		
 		model.addAttribute("STUDY_LIST",sList);
 		model.addAttribute("pageVO" , pageVO);
 		

@@ -19,9 +19,9 @@
 				<div class="col-10 comment">
 					<input type="text" name="c_content"
 						class="form-control comment border border-info" id="c_content"
-						placeholder="댓글">
+						placeholder="댓글을 작성하세요">
 				</div>
-				<button type="button" class="btn btn-success btn-cmt-save">저장</button>
+				<button type="button" class="btn btn-success btn-cmt-save">댓글작성</button>
 			</div>
 		</form>
 	</div>

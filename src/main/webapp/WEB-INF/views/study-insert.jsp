@@ -31,8 +31,19 @@
 
 input.subject{
 	width:100%;
+	height: 50px;
+	margin-bottom:10px;
 }
 
+.cate{
+	padding-top : 10px;
+	font-size:20px;
+}
+
+.btn {
+	background-color : #B45F04;
+	color : white;
+}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
@@ -55,9 +66,9 @@ input.subject{
 					</select>
 				</div>
 				<div class="subject">
-					<input class="subject" name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
+					<input class="subject info" name="s_subject" value="${STUDY.s_subject}" placeholder="제목">
 				</div>
-				<button class="btn btn-success save">저장</button>
+				<button class="btn save">저장</button>
 			</div>
 		</form>
 
